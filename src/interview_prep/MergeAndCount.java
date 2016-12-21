@@ -97,7 +97,7 @@ public class MergeAndCount {
 	}
 	
 	public static void main(String args[]) {
-		int[] a = {3, 5, 4, 6, 7 , 8 , 9, 10};
+		int[] a = {3, 5, 4, 6, 7 , 8 , 11, 10};
 		//System.out.println(Arrays.toString(a));
 		System.out.println(mergeandcount(a));
 		for (int k=0; k< a.length; k++) { 
