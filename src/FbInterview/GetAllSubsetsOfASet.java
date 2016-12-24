@@ -4,6 +4,9 @@ import java.util.*;
 
 public class GetAllSubsetsOfASet {
 
+	/* using recursion to generate something */
+	
+	
 	public static ArrayList<ArrayList<Integer>> getSubsets(ArrayList<Integer> set, int index) {
 		ArrayList<ArrayList<Integer>> allsubsets;
 		if (set.size() == index) { // Base case - add empty set when u reach the index equal to the size of the parent set
