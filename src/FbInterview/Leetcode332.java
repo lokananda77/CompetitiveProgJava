@@ -4,8 +4,27 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
 
 public class Leetcode332 {
+	
+		public static List<String> findItinerary1(String[][] tickets) {
+		    for (String[] ticket : tickets)
+		        targets.computeIfAbsent(ticket[0], k -> new PriorityQueue()).add(ticket[1]);
+		    visit("JFK");
+		    return route;
+		}
+	
+		static Map<String, PriorityQueue<String>> targets = new HashMap<>();
+		static List<String> route = new LinkedList();
+	
+		static void visit(String airport) {
+		    while(targets.containsKey(airport) && !targets.get(airport).isEmpty())
+		        visit(targets.get(airport).poll());
+		    route.add(0, airport);
+		}
+	
 	    public static List<String> findItinerary(String[][] tickets) {
 	        HashMap<String, List<String>> cities = new HashMap<String, List<String>>();
 	        List<String> destList;
@@ -47,6 +66,6 @@ public class Leetcode332 {
 	    
 	    public static void main(String[] args) {
 	    	String[][] tickets = {{"JFK","SFO"},{"JFK","ATL"},{"SFO","ATL"},{"ATL","JFK"},{"ATL","SFO"}};
-	    	System.out.println(findItinerary(tickets));
+	    	System.out.println(findItinerary1(tickets));
 		}
 	}

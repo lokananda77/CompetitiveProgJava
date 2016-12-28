@@ -22,6 +22,6 @@ public class ValidAnagram {
     }
     
     public static void main(String args[]) {
-		System.out.println(isAnagram("teeth", "dss"));
+		System.out.println(isAnagram("teeth", "eett"));
 	}
 }
