@@ -4,6 +4,21 @@ import java.util.*;
 
 public class GetAllSubsetsOfASet {
 
+	
+	public static int fact(int n, int level)
+    {
+       int result;
+       if(n==0 || n==1)
+         return 1;
+       // level helps u pass the state
+       System.out.println(level + " before");
+       System.out.println("						result before" + n);
+       result = fact(n-1, level + 1) * n;
+       System.out.println("						result after" + n);
+       System.out.println(level + " after");
+       return result;
+    }
+	
 	/* using recursion to generate something */
 	
 	public static List<List<Integer>> subsetsWithDup(int[] nums) {
@@ -15,22 +30,25 @@ public class GetAllSubsetsOfASet {
 	    return res;
 	}
 	public static void helper(List<List<Integer>> res, List<Integer> each, int pos, int[] n) {
-	    if (pos <= n.length) {
+	    int level = 0;
+		if (pos <= n.length) {
 	    	//System.out.println("subset");
-	    	System.out.println(each);
+	    	System.out.println(each + " pos " + pos + " level " + level);
 	        res.add(each);
 	    } else {
 	    	System.out.println("2Not Base Case");
 	    }
 	    int i = pos;
+	    
 	    while (i < n.length) {
+	    	//generate all possible combinations of including an element in n[i]
 	        each.add(n[i]);
 	        helper(res, new ArrayList<>(each), i + 1, n);
 	        each.remove(each.size() - 1);
 	        i++;
-	        //while (i < n.length && n[i] == n[i - 1]) {i++;}
+	        while (i < n.length && n[i] == n[i - 1]) {i++;}
 	    }
-	    //System.out.println("returned");
+	    // this line is the base case
 	    return;
 	}
 	
@@ -128,8 +146,47 @@ public class GetAllSubsetsOfASet {
 
 	}
 	
+	public static List<List<Integer>> subsetsWithDup3(int[] candidates, int target) {
+	    Arrays.sort(candidates);
+	    List<List<Integer>> res = new ArrayList<>();
+	    List<Integer> each = new ArrayList<>();
+	    helper3(res, each, 0, candidates, target, 0);
+	    return res;
+	}
+	public static void helper3(List<List<Integer>> res, List<Integer> each, int pos, int[] n, int target, int level) {
+	    int i = pos;
+	    if (i == n.length) {
+	    	System.out.println(each + "level " + level);
+	        return;
+	    } else if (i < n.length) {
+	    	System.out.println(each + "level " + level);
+	            res.add(each);
+    	    while (i < n.length) {
+    	    	//generate all possible combinations of including an element in n[i]
+
+    	        each.add(n[i]);
+    	        helper3(res, new ArrayList<>(each), i + 1, n, target, level + 1);
+    	        each.remove(each.size() - 1);
+    	        
+    	        i++;
+    	        while (i < n.length && n[i] == n[i - 1]) {i++;}
+    	    }
+	    }
+	}
+	
+	static void RecSubsets(String soFar, String rest)
+	{
+	 if (rest.isEmpty())
+		 System.out.println(soFar);
+	 else {
+		 RecSubsets(soFar + rest.charAt(0), rest.substring(1)); // include first char
+		 
+		 RecSubsets(soFar, rest.substring(1)); // exclude first char
+	 }
+	}
 	public static void main(String[] args) {
 		
+		fact(5, 0);
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		for (int i = 1; i < 5; i++) {
 			list.add(i);
@@ -149,6 +206,10 @@ public class GetAllSubsetsOfASet {
 		for(List<Integer>y:z) {
 			//System.out.println(y);
 		}
+		System.out.println("");
+		List<List<Integer>> zz = subsetsWithDup3(new int[]{1,2,3,4}, 5);
+		
+		RecSubsets("", "ABCDE");
 //		ArrayList<ArrayList<Integer>> subsets2 = getSubsets2(list);
 //		System.out.println(subsets2.toString());		
 	}
