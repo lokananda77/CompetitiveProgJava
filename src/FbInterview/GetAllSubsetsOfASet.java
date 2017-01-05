@@ -7,13 +7,15 @@ public class GetAllSubsetsOfASet {
 	
 	public static int fact(int n, int level)
     {
-       int result;
+       int result=0;
        if(n==0 || n==1)
          return 1;
        // level helps u pass the state
        System.out.println(level + " before");
        System.out.println("						result before" + n);
+       System.out.println("Aresult=" + result);
        result = fact(n-1, level + 1) * n;
+       System.out.println("Bresult=" + result);
        System.out.println("						result after" + n);
        System.out.println(level + " after");
        return result;
